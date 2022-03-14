@@ -1,11 +1,11 @@
-/* Box sizing rules */
+/* Сайзинг */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Remove default margin */
+/* Убираем отступы по умолчанию */
 body,
 h1,
 h2,
@@ -19,37 +19,37 @@ dd {
   margin: 0;
 }
 
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+/*  Убираем стили списков у ul, ol элементов с ролью списка, что подразумевает, что стили будут удалены */
 ul[role="list"],
 ol[role="list"] {
   list-style: none;
 }
 
-/* Set core root defaults */
+/* Устанавливаем корневые пременные */
 html {
   scroll-behavior: smooth;
 }
 
-/* Set core body defaults */
+/* Устанавливаем стили body */
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.6;
 }
 
-/* A elements that don't have a class get default styles */
+/* Элементу без класса присваиваются стандартные стили" */
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-/* Make images easier to work with */
+/* Успростим работу с картинками */
 img,
 picture {
   max-width: 100%;
   display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
+/* Наследовать шрифты для кнопок и полей */
 input,
 button,
 textarea,
@@ -57,7 +57,7 @@ select {
   font: inherit;
 }
 
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+/* Удаляем все анимации, переходы и гладкую прокрутку для людей, предпочитающих из не видеть */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

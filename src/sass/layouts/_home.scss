@@ -100,3 +100,29 @@
     }
   }
 }
+
+.skills {
+  padding: var(--section-spacing) 0;
+
+  &__body {
+    --flow-spacer: 2.5em;
+    text-align: center;
+  }
+
+  &__body > h3 {
+    font-weight: 500;
+  }
+
+  &__items {
+    --flow-spacer: 4.5em;
+  }
+
+  @include mq(small) {
+    &__items {
+      --flow-spacer: 0;
+      padding-top: 4.5em;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

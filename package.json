@@ -1,0 +1,14 @@
+{
+  "name": "z1",
+  "version": "1.0.0",
+  "author": "Pavel Polyakov",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.3.2",
+    "parcel": "^2.3.2"
+  }
+}

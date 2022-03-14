@@ -1,0 +1,12 @@
+.language-toggle {
+  font-size: var(--fs-600);
+  font-weight: 600;
+
+  & > h3 {
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
+    & > b {
+      color: var(--clr-primary-400);
+    }
+  }
+}

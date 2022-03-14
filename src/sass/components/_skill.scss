@@ -1,0 +1,31 @@
+.skill {
+  --item-spacing: 1.5em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &__icon > img {
+    width: unset;
+  }
+
+  &__name {
+    margin-top: var(--item-spacing);
+    max-width: 100px;
+    min-height: 3em;
+    font-size: var(--fs-300);
+    font-weight: 500;
+    color: var(--clr-primary-400);
+  }
+
+  &__rating > * + * {
+    margin-left: 0.5em;
+  }
+
+  &__star {
+    margin-top: calc(var(--item-spacing) + 10px);
+    fill: var(--clr-primary-200);
+  }
+  &__star--active {
+    fill: var(--clr-primary-500);
+  }
+}

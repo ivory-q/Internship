@@ -1,0 +1,20 @@
+@use "../abstracts" as *;
+
+.button {
+  border: none;
+  background-color: var(--clr-primary-500);
+  color: var(--clr-primary-100);
+  border-radius: 50px;
+  padding: 0.75em 2em;
+  width: 95%;
+  cursor: pointer;
+  transition: transform 100ms;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @include mq(small) {
+    width: auto;
+  }
+}

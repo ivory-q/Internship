@@ -126,3 +126,34 @@
     }
   }
 }
+
+.portfolio {
+  background-color: var(--clr-primary-200);
+  padding: var(--section-spacing) 0;
+  text-align: center;
+
+  &__works {
+    --flow-spacer: 4.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__body > h3 {
+    font-weight: 500;
+  }
+
+  &__image {
+    margin-bottom: 1.5em;
+  }
+
+  &__link {
+    color: var(--clr-primary-500);
+  }
+
+  @include mq(small) {
+    &__body {
+      max-width: 500px;
+    }
+  }
+}

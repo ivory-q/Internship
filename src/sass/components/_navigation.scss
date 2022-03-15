@@ -57,9 +57,6 @@
     &::after {
       display: none;
     }
-    &:hover {
-      --burger-color: var(--clr-primary-500);
-    }
   }
 
   &__toggle:checked ~ &__links {

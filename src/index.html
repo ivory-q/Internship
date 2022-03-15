@@ -12,15 +12,18 @@
       <div class="header__body container">
         <nav class="navigation header__navigation">
           <input
+            hidden
             type="checkbox"
             class="navigation__toggle"
             id="navigation__toggle"
-            hidden
           />
           <label class="navigation__burger" for="navigation__toggle">
             <span></span>
           </label>
-          <div class="navigation__links flow">
+          <div
+            class="navigation__links flow"
+            onclick="navigation__toggle.checked = false"
+          >
             <a href="" class="navigation__link navigation__link--active"
               >Home</a
             >
@@ -28,9 +31,9 @@
             <a href="#skills" class="navigation__link">Skills</a>
             <a href="#portfolio" class="navigation__link">Portfolio</a>
             <a href="#contacts" class="navigation__link">Contacts</a>
-            <div class="language-toggle navigation__language-toggle">
-              <h3><b>RU</b> | ENG</h3>
-            </div>
+          </div>
+          <div class="language-toggle navigation__language-toggle">
+            <h3><b>RU</b> | ENG</h3>
           </div>
         </nav>
 

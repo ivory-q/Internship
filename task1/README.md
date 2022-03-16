@@ -2,21 +2,18 @@
 
 Первое задание на стажировке, адаптивный макет с мобильным меню на Sass
 
-## Live сайт
-
-https://cocky-fermi-639be4.netlify.app/
-
 ## Запуск
 
-- Для разработки
-
+### - Yarn
 ```
-yarn install
-yarn dev
+yarn install    // Установка зависимостей
+yarn dev        // Запуск локального сервера
+yarn build      // Сборка решения
 ```
 
-- Для сборки
-
+### - NPM
 ```
-yarn build
+npm install     // Установка зависимостей
+npm run dev     // Запуск локального сервера
+npm run build   // Сборка решения
 ```

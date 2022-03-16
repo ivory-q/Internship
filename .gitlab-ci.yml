@@ -1,0 +1,4 @@
+pages:
+  script:
+    - cd ./task1/
+    - parcel build src/index.html

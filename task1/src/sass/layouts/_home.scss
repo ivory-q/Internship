@@ -3,7 +3,6 @@
 .header {
   &__body {
     --cont-vpad: 4.25em;
-    width: 85%;
     display: grid;
     grid-template-areas:
       "intro navigation"
@@ -28,7 +27,7 @@
 
 .intro {
   grid-area: intro;
-  --flow-spacer: 1.5em;
+  --flow-spacer: 1em;
 
   &__title {
     max-width: 100px;
@@ -60,17 +59,18 @@
 .banner {
   grid-area: image;
   margin-top: 2.5em;
+  margin-bottom: 2em;
 
   & > img {
     width: 100%;
-    height: clamp(400px, 60vh, 500px);
+    height: 500px;
     object-fit: cover;
   }
 
   @include mq(small) {
-    margin-bottom: 4em;
+    margin-bottom: 4.5em;
     & > img {
-      height: clamp(300px, 60vh, 400px);
+      height: 400px;
       object-position: 0 -50px;
     }
   }
@@ -86,10 +86,13 @@
   }
 
   &__body {
-    --flow-spacer: 2em;
+    --flow-spacer: 2.5em;
     line-height: 1.2em;
     text-align: center;
-    max-width: 85%;
+  }
+
+  &__body > p:first-of-type {
+    --flow-spacer: 1.5em;
   }
 
   @include mq(small) {
@@ -103,16 +106,20 @@
   padding: var(--section-spacing) 0;
 
   &__body {
-    --flow-spacer: 2.5em;
+    --flow-spacer: 2em;
     text-align: center;
-    width: 85%;
   }
 
   &__items {
-    --flow-spacer: 5em;
+    --flow-spacer: 4.5em;
+    margin-top: 4em;
   }
 
   @include mq(small) {
+    &__body {
+      --flow-spacer: 3em;
+    }
+
     &__items {
       --flow-spacer: 0;
       padding-top: 5em;
@@ -127,23 +134,27 @@
   padding: var(--section-spacing) 0;
   text-align: center;
 
-  &__body {
-    width: 85%;
-  }
-
   &__works {
     --flow-spacer: 4.5em;
+    margin-top: 4em;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   &__image {
-    margin-bottom: 1.75em;
+    margin-bottom: 2.5em;
   }
 
   &__link {
     color: var(--clr-primary-500);
+  }
+
+  @include mq(small) {
+    &__works {
+      --flow-spacer: 6.25em;
+      margin-top: 3.5em;
+    }
   }
 }
 
@@ -154,7 +165,6 @@
   &__body {
     --flow-spacer: 2em;
     text-align: center;
-    width: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -166,18 +176,19 @@
   }
 
   &__socials {
-    --flow-spacer: 4.5em;
-    width: 100%;
+    --flow-spacer: 3.5em;
+    width: clamp(300px, 100%, 350px);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   &__ad {
-    color: var(--clr-primary-300);
+    color: var(--clr-primary-400);
   }
 
   @include mq(small) {
     &__body {
+      --flow-spacer: 1.5em;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -188,7 +199,11 @@
     }
 
     &__socials {
-      width: clamp(300px, 50%, 500px);
+      --flow-spacer: 5.5em;
+    }
+
+    &__ad {
+      --flow-spacer: 3em;
     }
   }
 }

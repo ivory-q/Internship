@@ -39,11 +39,14 @@ h4,
   font-size: var(--fs-subtitle);
 }
 
-small,
 p,
-a,
-.text-small {
+a {
   font-size: var(--fs-text);
+}
+
+small,
+.text-small {
+  font-size: var(--fs-small);
 }
 
 a {

@@ -1,4 +1,7 @@
 $type-scale: (
+  /* Apparently, nobody cares about responsive typography,
+    so I remade it to fit design layout instead :( */
+  /*
   small: (
     // Major Third
     300: 1rem,
@@ -17,4 +20,10 @@ $type-scale: (
     700: 4rem,
     800: 5.653rem,
   ),
+  */
+  small: (
+    title: 2.9375rem,
+    subtitle: 2.125rem,
+    text: 1.125rem,
+  )
 );

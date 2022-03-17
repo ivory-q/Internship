@@ -5,6 +5,12 @@
   justify-content: space-around;
   flex-direction: column;
 
+  &__icon {
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
+
   &__icon > img {
     max-width: 100px;
   }
@@ -18,12 +24,15 @@
     color: var(--clr-primary-400);
   }
 
+  &__rating {
+    margin-top: var(--item-spacing);
+  }
+
   &__rating > * + * {
     margin-left: 0.5em;
   }
 
   &__star {
-    margin-top: calc(var(--item-spacing) + 10px);
     fill: var(--clr-primary-200);
   }
   &__star--active {

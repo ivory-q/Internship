@@ -2,8 +2,8 @@
 
 .header {
   &__body {
-    --cont-vpad: 2.25em;
-    --cont-hpad: 1em;
+    --cont-vpad: 4.25em;
+    width: 85%;
     display: grid;
     grid-template-areas:
       "intro navigation"
@@ -28,14 +28,14 @@
 
 .intro {
   grid-area: intro;
+  --flow-spacer: 1.5em;
+
   &__title {
     max-width: 100px;
-    line-height: 1.3em;
-    font-weight: 600;
   }
 
   &__info {
-    line-height: 1.1em;
+    line-height: 1.2em;
   }
 
   &__language-toggle {
@@ -50,7 +50,7 @@
     &__language-toggle {
       display: block;
       & > h3 {
-        font-size: var(--fs-400);
+        font-size: var(--fs-text);
         transform: rotate(180deg);
       }
     }
@@ -59,9 +59,10 @@
 
 .banner {
   grid-area: image;
-  margin: 2.25em 0;
+  margin-top: 2.5em;
 
   & > img {
+    width: 100%;
     height: clamp(400px, 60vh, 500px);
     object-fit: cover;
   }
@@ -69,8 +70,8 @@
   @include mq(small) {
     margin-bottom: 4em;
     & > img {
+      height: clamp(300px, 60vh, 400px);
       object-position: 0 -50px;
-      width: 100%;
     }
   }
 }
@@ -85,13 +86,10 @@
   }
 
   &__body {
-    --flow-spacer: 2.5em;
-    line-height: 1.1em;
+    --flow-spacer: 2em;
+    line-height: 1.2em;
     text-align: center;
-    max-width: 90%;
-  }
-  &__body > h3 {
-    font-weight: 500;
+    max-width: 85%;
   }
 
   @include mq(small) {
@@ -107,20 +105,17 @@
   &__body {
     --flow-spacer: 2.5em;
     text-align: center;
-  }
-
-  &__body > h3 {
-    font-weight: 500;
+    width: 85%;
   }
 
   &__items {
-    --flow-spacer: 4.5em;
+    --flow-spacer: 5em;
   }
 
   @include mq(small) {
     &__items {
       --flow-spacer: 0;
-      padding-top: 4.5em;
+      padding-top: 5em;
       display: flex;
       justify-content: space-between;
     }
@@ -132,6 +127,10 @@
   padding: var(--section-spacing) 0;
   text-align: center;
 
+  &__body {
+    width: 85%;
+  }
+
   &__works {
     --flow-spacer: 4.5em;
     display: flex;
@@ -139,47 +138,42 @@
     align-items: center;
   }
 
-  &__body > h3 {
-    font-weight: 500;
-  }
-
   &__image {
-    margin-bottom: 1.5em;
+    margin-bottom: 1.75em;
   }
 
   &__link {
     color: var(--clr-primary-500);
   }
-
-  @include mq(small) {
-    &__body {
-      max-width: 500px;
-    }
-  }
 }
 
 .footer {
   padding: var(--section-spacing) 0;
-  line-height: 1.1em;
+  line-height: 1.2em;
 
   &__body {
     --flow-spacer: 2em;
     text-align: center;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  &__body > h3 {
-    font-weight: 500;
+  &__button {
+    font-size: var(--fs-text);
+    width: 100%;
   }
 
   &__socials {
-    --flow-spacer: 3em;
+    --flow-spacer: 4.5em;
+    width: 100%;
     display: flex;
     justify-content: space-around;
   }
 
   &__ad {
     color: var(--clr-primary-300);
-    font-size: var(--fs-300);
   }
 
   @include mq(small) {
@@ -187,6 +181,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    &__button {
+      width: auto;
     }
 
     &__socials {

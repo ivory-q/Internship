@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pavel Polyakov - Portfolio</title>
     <link rel="stylesheet" href="sass/style.scss" />
+    <script defer src="./js/nav.js" type="module"></script>
   </head>
   <body>
     <header aria-labelledby="hero-title" class="header">
@@ -23,8 +24,8 @@
           <div class="navigation__bg">
             <div class="navigation__body">
               <ul
+                id="navigation__links"
                 class="navigation__links flow"
-                onclick="navigation__toggle.checked = false"
               >
                 <li>
                   <a href="" class="navigation__link navigation__link--active">

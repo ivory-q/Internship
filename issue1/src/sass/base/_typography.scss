@@ -1,0 +1,60 @@
+body {
+  font-size: var(--fs-400);
+  font-family: "Gilroy";
+  font-weight: 400;
+  color: var(--clr-primary-500);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  --font-weight: 600;
+  font-weight: 600;
+  font-stretch: 100%;
+  line-height: 1.1;
+  color: var(--clr-primary-500);
+}
+
+h1 {
+  --font-weight: 900;
+  color: var(--clr, var(--clr-primary-500));
+}
+
+.title {
+  /* No responsive types for me */
+  // font-size: clamp(var(--fs-700), calc(1rem + 5vw), 4rem);
+  font-size: var(--fs-title);
+  font-weight: 600;
+}
+
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4 {
+  font-size: var(--fs-subtitle);
+}
+
+p,
+a {
+  font-size: var(--fs-text);
+}
+
+small,
+.text-small {
+  font-size: var(--fs-small);
+}
+
+a {
+  color: var(--clr, var(--clr-primary-400));
+
+  &:hover,
+  &:focus {
+    color: var(--clr-primary-500);
+    text-decoration: none;
+  }
+}

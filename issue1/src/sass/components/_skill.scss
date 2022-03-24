@@ -1,0 +1,41 @@
+.skill {
+  --item-spacing: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+
+  &__icon {
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon > img {
+    max-width: 100px;
+  }
+
+  &__name {
+    max-width: 100px;
+    min-height: 3em;
+    margin-top: var(--item-spacing);
+    color: var(--clr-primary-400);
+    font-size: var(--fs-small);
+    font-weight: 600;
+  }
+
+  &__rating {
+    margin-top: var(--item-spacing);
+  }
+
+  &__rating > * + * {
+    margin-left: 0.5em;
+  }
+
+  &__star {
+    fill: var(--clr-primary-300);
+  }
+  &__star--active {
+    fill: var(--clr-primary-500);
+  }
+}

@@ -1,0 +1,141 @@
+@use "../abstracts" as *;
+
+.navigation {
+  &__bg {
+    background-color: var(--clr-primary-100);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: transform 200ms;
+    transform: translateX(100%);
+  }
+
+  &__body {
+    width: 85%;
+    min-height: 100%;
+    padding: 4.25em 0;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  &__links {
+    --flow-spacer: 2.5em;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__link {
+    width: 85%;
+    text-decoration: none;
+    color: var(--clr-primary-400);
+    font-size: var(--fs-subtitle);
+    font-weight: 600;
+  }
+
+  &__link--active {
+    color: var(--clr-primary-500);
+  }
+
+  &__burger {
+    --burger-color: var(--clr-primary-500);
+  }
+
+  &__burger > span {
+    z-index: 9;
+    transition: transform 100ms;
+    display: inline-block;
+    height: 4px;
+    width: 33px;
+    background-color: var(--burger-color);
+
+    @include pseudo(before, $top: -8px) {
+      height: 4px;
+      width: 33px;
+      background-color: var(--burger-color);
+    }
+    @include pseudo(after, $top: 8px) {
+      height: 4px;
+      width: 33px;
+      background-color: var(--burger-color);
+    }
+  }
+
+  &__language-toggle {
+    position: absolute;
+    bottom: 2em;
+    right: 0;
+    transition: transform 200ms;
+    transform: translateY(100%);
+  }
+
+  &__toggle:checked ~ &__bg {
+    transform: translateX(0);
+    display: block;
+  }
+
+  &__toggle:checked ~ &__burger > span {
+    transition: transform 100ms;
+    transform: rotate(45deg);
+    --burger-color: var(--clr-primary-400);
+    &::before {
+      top: 0;
+      transform: rotate(90deg);
+    }
+    &::after {
+      display: none;
+    }
+  }
+
+  &__toggle:checked ~ &__bg &__language-toggle {
+    transform: translateX(0);
+  }
+
+  @include mq(small) {
+    width: 100%;
+
+    &__bg {
+      transform: none;
+      position: static;
+    }
+
+    &__body {
+      width: auto;
+      padding: 0;
+      margin: 0;
+    }
+
+    &__burger {
+      display: none;
+    }
+
+    &__links {
+      --flow-spacer: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 4.5em;
+
+      @include pseudo(after, $top: unset, $bottom: -2em) {
+        width: 100%;
+        height: 1px;
+        background-color: var(--clr-primary-400);
+      }
+    }
+
+    &__link {
+      width: auto;
+      text-decoration: none;
+      color: var(--clr-primary-400);
+      font-size: var(--fs-text);
+    }
+
+    &__language-toggle {
+      display: none;
+    }
+  }
+}

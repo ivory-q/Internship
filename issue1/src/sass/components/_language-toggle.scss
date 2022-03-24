@@ -1,0 +1,10 @@
+.language-toggle {
+
+  & > h3 {
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
+    & > b {
+      color: var(--clr-primary-400);
+    }
+  }
+}

@@ -4,10 +4,12 @@
 export default class BubbleSort {
   /**
    *
-   * @param {array} assorted - An assorted array of natural numbers
+   * @param {array} assortedInp - An assorted array of natural numbers
    * @returns {array} - Result of sorting the assorted array
    */
-  public static sort(assorted: Array<number>): Array<number> {
+  public static sort(assortedInp: Array<number>): Array<number> {
+    // Clone array to avoid side effects to original one
+    let assorted = [...assortedInp];
     // If elements hadn't change places, the array is sorted
     let swapped: boolean = false;
 
@@ -29,7 +31,6 @@ export default class BubbleSort {
         break;
       }
     }
-
     return assorted;
   }
 }

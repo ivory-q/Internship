@@ -5,7 +5,7 @@
 //      compare it to the elements before.
 //  Move the greater elements one position up to make space for the swapped element.
 
-export default class BubbleSort {
+export default class InsertionSort {
   /**
    *
    * @param {array} assortedInp - An assorted array of natural numbers

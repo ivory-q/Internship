@@ -1,6 +1,7 @@
 import SelectionSort from "../SelectionSort";
 import BubbleSort from "../BubbleSort";
 import InsertionSort from "../InsertionSort";
+import MergeSort from "../MergeSort";
 
 describe("sorting algorithms", () => {
   const assorted: Array<number> = [-3, -1, 2, 4, -5, 0, 7, -2];
@@ -18,19 +19,19 @@ describe("sorting algorithms", () => {
     expect(InsertionSort.sort(assorted)).toEqual(sorted);
   });
 
-  // it("merge sort works", () => {
-  //   expect(MergeSort.sort(assorted)).toEqual(sorted);
-  // });
+  it("merge sort works", () => {
+    expect(MergeSort.sort(assorted)).toEqual(sorted);
+  });
 
-  // it("heap sort works", () => {
-  //   expect(HeapSort.sort(assorted)).toEqual(sorted);
-  // });
+  it("heap sort works", () => {
+    expect(HeapSort.sort(assorted)).toEqual(sorted);
+  });
 
-  // it("quick sort works", () => {
-  //   expect(QuickSort.sort(assorted)).toEqual(sorted);
-  // });
+  it("quick sort works", () => {
+    expect(QuickSort.sort(assorted)).toEqual(sorted);
+  });
   
-  // it("radix sort works", () => {
-  //   expect(RadixSort.sort(assorted)).toEqual(sorted);
-  // });
+  it("radix sort works", () => {
+    expect(RadixSort.sort(assorted)).toEqual(sorted);
+  });
 });

@@ -1,0 +1,24 @@
+{
+  "name": "issue2",
+  "version": "1.0.0",
+  "author": "Pavel Polyakov",
+  "description": "algoritms with tdd and typescript",
+  "license": "MIT",
+  "scripts": {
+    "run:1": "ts-node ./1",
+    "run:2": "ts-node ./2",
+    "run:3": "ts-node ./3",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
+    "prompt": "^1.2.2",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/prompt": "^1.1.2"
+  }
+}

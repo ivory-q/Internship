@@ -1,3 +1,5 @@
+import SelectionSort from "../SelectionSort";
+
 describe("sorting algorithms", () => {
   const assorted: Array<number> = [-3, -1, 2, 4, -5, 0, 7, -2];
   const sorted: Array<number> = [-5, -3, -2, -1, 0, 2, 4, 7];

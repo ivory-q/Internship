@@ -148,4 +148,6 @@ dist
 *.sass.map
 *.scss.map
 
+.vscode/
+
 # End of https://www.toptal.com/developers/gitignore/api/node,sass

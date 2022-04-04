@@ -12,7 +12,10 @@ export default class SelectionSort {
    * @param {array} assorted - An assorted array of natural numbers
    * @returns {array} - Result of sorting the assorted array
    */
-  public static sort(assorted: Array<number>): Array<number> {
+  public static sort(assortedInp: Array<number>): Array<number> {
+    // Clone array to avoid side effects to original one
+    // Destructive splice() method
+    let assorted = [...assortedInp];
     let sorted: Array<number> = [];
 
     let assortedLength: number = assorted.length;

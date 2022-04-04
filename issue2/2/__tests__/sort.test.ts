@@ -1,15 +1,16 @@
 import SelectionSort from "../SelectionSort";
+import BubbleSort from "../BubbleSort";
 
 describe("sorting algorithms", () => {
   const assorted: Array<number> = [-3, -1, 2, 4, -5, 0, 7, -2];
   const sorted: Array<number> = [-5, -3, -2, -1, 0, 2, 4, 7];
 
   it("selection sort works", () => {
-    expect(SelectionSort.sort(assorted)).toEqual([sorted]);
+    expect(SelectionSort.sort(assorted)).toEqual(sorted);
   });
 
   it("bubble sort works", () => {
-    expect(BubbleSort.sort(assorted)).toEqual([sorted]);
+    expect(BubbleSort.sort(assorted)).toEqual(sorted);
   });
 
   it("insertion sort works", () => {

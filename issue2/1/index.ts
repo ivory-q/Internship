@@ -7,7 +7,7 @@ prompt.start();
 prompt.get(
   [
     { name: "haystack", type: "string", pattern: /-?\d+/, required: true },
-    { name: "needle", type: "integer", required: true },
+    { name: "needle", type: "string", pattern: /-?\d+/, required: true },
   ],
   (err, result) => {
     if (err) {
@@ -15,10 +15,16 @@ prompt.get(
       return 1;
     }
     console.log("\n  Haystack: " + result.haystack);
-    console.log("  Needle: " + result.needle);
+    console.log("  Needle: " + result.needle + "\n");
 
-    let needle = +result.needle;
+    let needle = [];
     let haystack = [];
+
+    String(result.needle)
+      .split(" ")
+      .forEach((element) => {
+        needle.push(+element);
+      });
 
     String(result.haystack)
       .split(" ")
@@ -26,6 +32,9 @@ prompt.get(
         haystack.push(+element);
       });
 
-    console.log("\n  Result: " + BinarySearch.search(needle, haystack) + "\n");
+    const searchResults = BinarySearch.search(needle, haystack);
+    searchResults.forEach((result) => {
+      console.log(result);
+    });
   }
 );

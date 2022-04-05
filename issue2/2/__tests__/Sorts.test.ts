@@ -3,6 +3,7 @@ import BubbleSort from "../BubbleSort";
 import InsertionSort from "../InsertionSort";
 import MergeSort from "../MergeSort";
 import HeapSort from "../HeapSort";
+import QuickSort from "../QuickSort";
 
 describe("sorting algorithms", () => {
   const assorted: Array<number> = [-3, -1, 2, 4, -5, 0, 7, -2];

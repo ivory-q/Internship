@@ -26,7 +26,6 @@ export default class InsertionSort {
           if (current < assorted[j]) {
             assorted[j + 1] = assorted[j];
           } else {
-            assorted[j + 1] = current;
             break;
           }
           // Swap previous position of preceding element with current

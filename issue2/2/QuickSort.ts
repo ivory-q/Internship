@@ -65,10 +65,7 @@ export default class QuickSort {
             // If one of element's value is less than pivot's swap it with pointer
             // Continue iteration of the first loop
             if (arr[j] < pivot.value) {
-              let buffer = arr[i];
-
-              arr[i] = arr[j];
-              arr[j] = buffer;
+              [arr[i], arr[j]] = [arr[j], arr[i]];
               break;
             }
             // If an element with less than pivot's value wasn't found, stop all iterations
@@ -82,10 +79,10 @@ export default class QuickSort {
       // As at this point to the left of the pointer will be elements less than pivot
       // And to the right - greater than pivot
       if (pointer) {
-        let buffer = arr[pointer.index];
-
-        arr[pointer.index] = arr[pivot.index];
-        arr[pivot.index] = buffer;
+        [arr[pointer.index], arr[pivot.index]] = [
+          arr[pivot.index],
+          arr[pointer.index],
+        ];
 
         pivot.index = pointer.index;
       }

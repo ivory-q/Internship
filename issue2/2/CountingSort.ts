@@ -5,9 +5,9 @@
 
 export default class CountingSort {
   /**
-   *
-   * @param {array} assortedInp - An assorted array of natural numbers
-   * @returns {array} - Result of sorting the assorted array
+   * Sorts an array
+   * @param {Array<number>} assortedInp - An assorted array of positive natural numbers
+   * @returns {Array<number>} - Result of sorting the assorted array
    */
   public static sort(assortedInp: Array<number>): Array<number> {
     // Clone array to avoid side effects to original one
@@ -53,6 +53,7 @@ export default class CountingSort {
     for (let i = 0; i < assorted.length; i++) {
       const element = assorted[i];
       sorted[aux[element] - 1] = element;
+      // Subtract count to place duplicate items adjacent to each other
       aux[element] -= 1;
     }
 

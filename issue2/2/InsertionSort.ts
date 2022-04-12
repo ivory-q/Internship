@@ -7,9 +7,9 @@
 
 export default class InsertionSort {
   /**
-   *
-   * @param {array} assortedInp - An assorted array of natural numbers
-   * @returns {array} - Result of sorting the assorted array
+   * Sorts an array
+   * @param {Array<number>} assortedInp - An assorted array of natural numbers
+   * @returns {Array<number>} - Result of sorting the assorted array
    */
   public static sort(assortedInp: Array<number>): Array<number> {
     // Clone array to avoid side effects to original one
@@ -19,15 +19,17 @@ export default class InsertionSort {
       let current = assorted[i];
       let prev = assorted[i - 1];
 
+      // If current is less than previous, then compare it to all preceding
       if (current < prev) {
         for (let j = i - 1; j >= 0; j--) {
+          // If current is less than preceding element, then shift it forward to 1
           if (current < assorted[j]) {
             assorted[j + 1] = assorted[j];
           } else {
             assorted[j + 1] = current;
             break;
           }
-
+          // Swap previous position of preceding element with current
           assorted[j] = current;
         }
       }

@@ -9,9 +9,9 @@ import { Heap } from "./structures/Heap";
 
 export default class HeapSort {
   /**
-   *
-   * @param {array} assortedInp - An assorted array of natural numbers
-   * @returns {array} - Result of sorting the assorted array
+   * Sorts an array
+   * @param {Array<number>} assortedInp - An assorted array of natural numbers
+   * @returns {Array<number>} - Result of sorting the assorted array
    */
   public static sort(assortedInp: Array<number>): Array<number> {
     // Clone array to avoid side effects to original one

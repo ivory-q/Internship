@@ -5,9 +5,9 @@
   "description": "algoritms with tdd and typescript",
   "license": "MIT",
   "scripts": {
-    "run:1": "ts-node ./1",
-    "run:2": "ts-node ./2",
-    "run:3": "ts-node ./3",
+    "start:1": "ts-node ./1",
+    "start:2": "ts-node ./2",
+    "start:3": "ts-node ./3",
     "test": "jest"
   },
   "dependencies": {

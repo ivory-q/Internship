@@ -24,7 +24,7 @@ export function countFridayAnniversaries(birthday: string) {
   return fridayCounter;
 }
 
-export function dateArrayFromString(dateString: string): Array<number> {
+function dateArrayFromString(dateString: string): Array<number> {
   let dateArray = dateString
     .toString()
     .split(".")
@@ -34,4 +34,18 @@ export function dateArrayFromString(dateString: string): Array<number> {
     });
 
   return dateArray;
+}
+
+export function isValidDate(dateString: string) {
+  const [day, month, year] = dateString.split(".");
+  const isoDateString = `${year}-${month}-${day}`;
+
+  const date = new Date(isoDateString);
+  const time = date.getTime();
+
+  if (typeof time !== "number" || Number.isNaN(time)) {
+    return false;
+  }
+
+  return date.toISOString().startsWith(isoDateString);
 }

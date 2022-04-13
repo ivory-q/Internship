@@ -47,8 +47,7 @@ const results: Result[] = [
 function testPerformance(sortFunc: Function, arr: Array<number>): number {
   const t1 = performance.now();
   sortFunc(arr);
-  const t2 = performance.now() - t1;
-  return t2;
+  return performance.now() - t1;
 }
 
 let best: Result = { name: null, time: Infinity };

@@ -1,48 +1,48 @@
-import SelectionSort from "../SelectionSort";
-import BubbleSort from "../BubbleSort";
-import InsertionSort from "../InsertionSort";
-import MergeSort from "../MergeSort";
-import HeapSort from "../HeapSort";
-import QuickSort from "../QuickSort";
-import CountingSort from "../CountingSort";
+import selectionSort from "../SelectionSort";
+import bubbleSort from "../BubbleSort";
+import insertionSort from "../InsertionSort";
+import mergeSort from "../MergeSort";
+import heapSort from "../HeapSort";
+import quickSort from "../QuickSort";
+import countingSort from "../CountingSort";
 
 describe("sorting algorithms", () => {
   const assorted: Array<number> = [-3, -1, 2, 4, -5, 0, 7, -2];
   const sorted: Array<number> = [-5, -3, -2, -1, 0, 2, 4, 7];
 
   it("selection sort works", () => {
-    expect(SelectionSort.sort(assorted)).toEqual(sorted);
+    expect(selectionSort(assorted)).toEqual(sorted);
   });
 
   it("bubble sort works", () => {
-    expect(BubbleSort.sort(assorted)).toEqual(sorted);
+    expect(bubbleSort(assorted)).toEqual(sorted);
   });
 
   it("insertion sort works", () => {
-    expect(InsertionSort.sort(assorted)).toEqual(sorted);
+    expect(insertionSort(assorted)).toEqual(sorted);
   });
 
   it("merge sort works", () => {
-    expect(MergeSort.sort(assorted)).toEqual(sorted);
+    expect(mergeSort(assorted)).toEqual(sorted);
   });
 
   it("heap sort works", () => {
-    expect(HeapSort.sort(assorted)).toEqual(sorted);
+    expect(heapSort(assorted)).toEqual(sorted);
   });
 
   it("quick sort works", () => {
-    expect(QuickSort.sort(assorted)).toEqual(sorted);
+    expect(quickSort(assorted)).toEqual(sorted);
   });
 
   it("counting sort works", () => {
     const assorted: Array<number> = [38, 27, 43, 3, 9, 82, 10];
     const sorted: Array<number> = [3, 9, 10, 27, 38, 43, 82];
-    expect(CountingSort.sort(assorted)).toEqual(sorted);
+    expect(countingSort(assorted)).toEqual(sorted);
   });
 
   it("counting sort doesn't work on negative numbers", () => {
     expect(() => {
-      CountingSort.sort(assorted);
+      countingSort(assorted);
     }).toThrowError("error(negative numbers in array)");
   });
 });

@@ -1,10 +1,10 @@
-import SelectionSort from "./SelectionSort";
-import BubbleSort from "./BubbleSort";
-import InsertionSort from "./InsertionSort";
-import MergeSort from "./MergeSort";
-import HeapSort from "./HeapSort";
-import QuickSort from "./QuickSort";
-import CountingSort from "./CountingSort";
+import selectionSort from "./SelectionSort";
+import bubbleSort from "./BubbleSort";
+import insertionSort from "./InsertionSort";
+import mergeSort from "./MergeSort";
+import heapSort from "./HeapSort";
+import quickSort from "./QuickSort";
+import countingSort from "./CountingSort";
 
 import { testArray } from "./testArray";
 
@@ -16,31 +16,31 @@ type Result = {
 const results: Result[] = [
   {
     name: "SelectionSort",
-    time: testPerformance(SelectionSort.sort, testArray),
+    time: testPerformance(selectionSort, testArray),
   },
   {
     name: "BubbleSort",
-    time: testPerformance(BubbleSort.sort, testArray),
+    time: testPerformance(bubbleSort, testArray),
   },
   {
     name: "InsertionSort",
-    time: testPerformance(InsertionSort.sort, testArray),
+    time: testPerformance(insertionSort, testArray),
   },
   {
     name: "MergeSort",
-    time: testPerformance(MergeSort.sort, testArray),
+    time: testPerformance(mergeSort, testArray),
   },
   {
     name: "HeapSort",
-    time: testPerformance(HeapSort.sort, testArray),
+    time: testPerformance(heapSort, testArray),
   },
   {
     name: "QuickSort",
-    time: testPerformance(QuickSort.sort, testArray),
+    time: testPerformance(quickSort, testArray),
   },
   {
     name: "CountingSort",
-    time: testPerformance(CountingSort.sort, testArray),
+    time: testPerformance(countingSort, testArray),
   },
 ];
 

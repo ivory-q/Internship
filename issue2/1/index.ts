@@ -1,6 +1,6 @@
 import prompt from "prompt";
 
-import BinarySearch from "./BinarySearch";
+import binarySearch from "./BinarySearch";
 
 // Start user prompt in a terminal
 prompt.start();
@@ -25,7 +25,7 @@ prompt.get(
     let needle = [];
     let haystack = [];
 
-    // Convert strings from user input to arrays of numbers 
+    // Convert strings from user input to arrays of numbers
     String(result.needle)
       .split(" ")
       .forEach((element) => {
@@ -38,8 +38,8 @@ prompt.get(
         haystack.push(+element);
       });
 
-      // Perform binary search on user defined arrays
-    const searchResults = BinarySearch.search(needle, haystack);
+    // Perform binary search on user defined arrays
+    const searchResults = binarySearch(needle, haystack);
     searchResults.forEach((result) => {
       // Print the results of the search
       console.log(result);

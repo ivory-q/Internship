@@ -152,6 +152,6 @@ dist
 .idea/
 package-lock.json
 yarn.lock
-
+build
 
 # End of https://www.toptal.com/developers/gitignore/api/node,sass

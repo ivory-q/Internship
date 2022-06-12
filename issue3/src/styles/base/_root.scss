@@ -1,0 +1,13 @@
+@use '@styles/abstracts' as *;
+
+:root {
+  --header-height: 100px;
+  --container-width: 1400px;
+  --container-slim-width: 550px;
+
+  @each $color, $shade in $colors {
+    @each $prop, $value in $shade {
+      --clr-#{$color}-#{$prop}: #{$value};
+    }
+  }
+}

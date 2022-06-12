@@ -1,0 +1,23 @@
+@mixin container {
+  max-width: var(--container-width);
+  width: 100%;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+@mixin container-slim {
+  @include container;
+  padding-top: 50px;
+  max-width: var(--container-slim-width);
+}
+
+@mixin form-reset {
+  background: none;
+  outline: none;
+  border: none;
+}

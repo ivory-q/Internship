@@ -1,0 +1,41 @@
+@use '@styles/abstracts/_mixins' as *;
+
+.form {
+  &__container {
+    @include container-slim;
+
+    height: 100%;
+    padding-bottom: 50px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin: 10px 20px;
+    font-weight: 400;
+  }
+
+  &__actions {
+    * + * {
+      margin-left: 30px;
+    }
+  }
+
+  &__content {
+    margin-top: 20px;
+    & > * {
+      margin-bottom: 30px;
+    }
+  }
+  &__group {
+    display: flex;
+    * + * {
+      margin-left: 30px;
+    }
+  }
+}

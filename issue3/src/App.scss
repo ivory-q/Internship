@@ -1,0 +1,5 @@
+@use '@styles/base';
+
+.app-container {
+  min-height: calc(100vh - var(--header-height) * 2);
+}

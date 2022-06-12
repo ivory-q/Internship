@@ -1,0 +1,21 @@
+@use '@styles/abstracts/_mixins' as *;
+
+.btn {
+  @include form-reset;
+
+  cursor: pointer;
+
+  background-color: var(--clr-primary-400);
+  color: white;
+
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+
+  padding: 16px 16px;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: var(--clr-primary-300);
+  }
+}

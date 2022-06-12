@@ -12,7 +12,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@assets': path.resolve(__dirname, '..', './src/assets/'),
-      '@styles': path.resolve(__dirname, '..', './src/styles'),
+      '@styles': path.resolve(__dirname, '..', './src/styles/'),
     },
   },
   plugins: [

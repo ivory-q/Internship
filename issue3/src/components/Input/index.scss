@@ -1,0 +1,13 @@
+@use '@styles/abstracts/_mixins' as *;
+
+.input {
+  @include form-reset;
+
+  width: 100%;
+  border: 1px solid lightgrey;
+
+  font-weight: 300;
+
+  padding: 16px 16px;
+  border-radius: 2px;
+}

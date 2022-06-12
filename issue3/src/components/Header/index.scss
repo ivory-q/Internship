@@ -1,0 +1,32 @@
+@use '@styles/abstracts/_mixins' as *;
+
+.header {
+  background-color: #f6f9f9;
+  height: var(--header-height);
+
+  display: flex;
+  align-items: center;
+
+  &__container {
+    @include container;
+
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    &:hover > * {
+      color: var(--clr-primary-400);
+    }
+  }
+
+  &__logo {
+    height: 40px;
+    width: 40px;
+  }
+
+  &__title {
+    margin: 0 20px;
+    color: var(--clr-primary-500);
+    font-weight: 400;
+  }
+}

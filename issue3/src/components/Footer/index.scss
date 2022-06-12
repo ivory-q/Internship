@@ -1,0 +1,18 @@
+@use '@styles/abstracts/_mixins' as *;
+
+.footer {
+  background-color: #f6f9f9;
+  height: var(--header-height);
+
+  display: flex;
+  align-items: center;
+
+  &__container {
+    @include container;
+  }
+
+  &__copyright {
+    margin: 0;
+    color: grey;
+  }
+}

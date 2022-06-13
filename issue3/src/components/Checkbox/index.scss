@@ -1,5 +1,7 @@
 .checkbox {
   &__container {
+    position: relative;
+
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -12,8 +14,13 @@
     width: 20px;
     background: white;
     border: 1px lightgrey solid;
+
     margin-right: 6px;
     border-radius: 2px;
+
+    &--error {
+      border: 2px red solid;
+    }
 
     &--active {
       border-color: var(--clr-primary-400);

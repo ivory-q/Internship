@@ -1,28 +1,4 @@
-@use '@styles/abstracts/_mixins' as *;
-
-.home {
-  &__container {
-    @include container-slim;
-
-    height: 100%;
-  }
-
-  &__header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  &__title {
-    font-size: 2.5rem;
-    margin: 10px 20px;
-    font-weight: 400;
-  }
-}
-
 .requests {
-  margin: 20px 0;
-
   &__item {
     margin: 20px 0;
     display: flex;

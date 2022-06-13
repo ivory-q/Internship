@@ -5,6 +5,7 @@ import './index.scss';
 interface ICheckboxProps {
   checked?: boolean;
   children?: ReactNode;
+  error?: string;
   onChange?: (checked: boolean) => void;
 }
 
@@ -13,12 +14,13 @@ const checkboxId = nanoid();
 export const Checkbox = ({
   children,
   checked = false,
+  error,
   onChange,
 }: ICheckboxProps) => {
   const [isChecked, setIsChecked] = useState(checked);
 
   return (
-    <label htmlFor={checkboxId} className='checkbox__container'>
+    <label htmlFor={checkboxId} className='checkbox__container '>
       <input
         type='checkbox'
         checked={checked}
@@ -30,7 +32,9 @@ export const Checkbox = ({
         className='checkbox__old'
       />
       <svg
-        className={`checkbox__new ${isChecked ? 'checkbox__new--active' : ''}`}
+        className={`checkbox__new ${error ? 'checkbox__new--error' : ''} ${
+          isChecked ? 'checkbox__new--active' : ''
+        }`}
         aria-hidden='true'
         viewBox='0 0 15 11'
         fill='none'
@@ -42,6 +46,7 @@ export const Checkbox = ({
         />
       </svg>
       <div>{children}</div>
+      {error && <span className='errors'>{error}</span>}
     </label>
   );
 };

@@ -5,8 +5,7 @@ import dictionaries from '../data/dictionaries';
 import requests from '../data/requests';
 import EStatuses from '../types/enums/EStatuses';
 import IDictionary from '../types/IDictionary';
-import { IRequestBody, IRequestFull } from '../types/IRequest';
-import Nullable from '../types/Nullable';
+import { IRequestFull } from '../types/IRequest';
 
 const RequestModel: ModelDefinition<IRequestFull> = Model.extend({});
 const DictionaryModel: ModelDefinition<IDictionary<object>> = Model.extend({});
@@ -90,22 +89,18 @@ export default function initMockServer() {
         attrs.status = { code: EStatuses.DRAFT };
         attrs.createDate = new Date().toISOString();
 
-        const newRequest: IRequestBody & Nullable<IRequestFull> = schema.create(
-          'request',
-          attrs
-        )?.attrs;
-        newRequest.id = null;
-        newRequest.status = null;
-        newRequest.createDate = null;
+        // newRequest.id = null;
+        // newRequest.status = null;
+        // newRequest.createDate = null;
 
-        return newRequest;
+        return schema.create('request', attrs)?.attrs;
       });
 
       this.post('/request/registration', (schema: AppSchema, req) => {
         const attrs = JSON.parse(req.requestBody);
         attrs.status = { code: EStatuses.PROCESSING };
         attrs.createDate = new Date().toISOString();
-        return schema.create('request', attrs);
+        return schema.create('request', attrs)?.attrs;
       });
 
       this.put('/request', (schema: AppSchema, req) => {

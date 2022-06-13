@@ -1,18 +1,23 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import DropdownItem from '../../types/DropdownItem';
 import './index.scss';
-
-interface DropdownItem<T = any> {
-  [k: string]: T;
-}
 
 interface IDropdownProps {
   title?: string;
-  list: Array<DropdownItem>;
+  list: DropdownItem[];
+  value?: DropdownItem;
+  error?: string;
   onChange: (item: DropdownItem) => void;
 }
 
-export const Dropdown = ({ title, list, onChange }: IDropdownProps) => {
+export const Dropdown = ({
+  title,
+  list = [],
+  error,
+  value,
+  onChange,
+}: IDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [headerTitle, setHeaderTitle] = useState(title);
@@ -20,18 +25,31 @@ export const Dropdown = ({ title, list, onChange }: IDropdownProps) => {
   const dropdownMenu = useRef(null);
   useOnClickOutside(dropdownMenu, () => setIsOpen(false));
 
+  useEffect(() => {
+    if (value?.name) {
+      selectItem(value);
+    } else {
+      clearSelection();
+    }
+  }, [value]);
+
+  const clearSelection = () => {
+    setHeaderTitle(title);
+    setIsSelected(false);
+  };
+
   const selectItem = (item: DropdownItem) => {
-    const { title } = item;
+    const { name } = item;
 
     setIsOpen(false);
-    setHeaderTitle(title);
+    setHeaderTitle(name || '');
     setIsSelected(true);
     onChange(item);
   };
 
   return (
     <div
-      className='dropdown__container'
+      className={`dropdown__container ${error ? 'dropdown--error' : ''}`}
       ref={dropdownMenu}
       onClick={() => {
         setIsOpen((open) => !open);
@@ -40,7 +58,7 @@ export const Dropdown = ({ title, list, onChange }: IDropdownProps) => {
       <div className='dropdown__header'>
         <div
           className={`dropdown__title ${
-            isSelected && 'dropdown__title--active'
+            isSelected ? 'dropdown__title--active' : ''
           }`}
         >
           {headerTitle}
@@ -53,20 +71,21 @@ export const Dropdown = ({ title, list, onChange }: IDropdownProps) => {
       </div>
       {isOpen && (
         <div className='dropdown-list'>
-          {list.map((item) => (
+          {list.map((item, index) => (
             <div
               className='dropdown-list__item'
-              key={item.id}
+              key={index}
               onClick={(e) => {
                 e.stopPropagation();
                 selectItem(item);
               }}
             >
-              {item.title}
+              {item.name}
             </div>
           ))}
         </div>
       )}
+      {error && <span className='errors'>{error}</span>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { EStatuses } from './enums/EStatuses';
+import EStatuses from './enums/EStatuses';
 
 export interface IRequestFull extends IRequestBody {
   id: number;

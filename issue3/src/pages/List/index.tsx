@@ -33,7 +33,13 @@ export const List = observer(({ store }: { store: typeof rootStore }) => {
         </>
       </div>
       <div className='home__actions'>
-        <Button onClick={() => navigate('/draft')}>Создать заявку</Button>
+        <Button
+          onClick={() => {
+            navigate('/draft');
+          }}
+        >
+          Создать заявку
+        </Button>
       </div>
     </div>
   );

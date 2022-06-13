@@ -6,7 +6,9 @@ import { Button } from '../../components/Button';
 import { Checkbox } from '../../components/Checkbox';
 import { Dropdown } from '../../components/Dropdown';
 import { Input } from '../../components/Input';
+import { LoaderOverlay } from '../../components/LoaderOverlay';
 import rootStore from '../../stores/rootStore';
+import EStatuses from '../../types/enums/EStatuses';
 import ICar from '../../types/ICar';
 import ICity from '../../types/ICity';
 import { IRequestFull } from '../../types/IRequest';
@@ -17,30 +19,46 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
   const navigate = useNavigate();
 
   const [draft, setDraft] = useState<IRequestFull | null>(null);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
 
   useEffect(() => {
     if (draftId) {
+      store.draftStore.clear();
+      store.uiStore.setLoading(true);
       store.requestStore
         .loadRequest(parseInt(draftId), { acceptCached: true })
         .then((draft) => {
           store.draftStore.setDraft(draft);
           return draft;
         })
+        .then((draft) => {
+          if (draft.status.code == EStatuses.PROCESSING) {
+            const loadInterval = setInterval(() => {
+              const status = store.requestStore.getStatus(draft.id);
+              if (status != EStatuses.PROCESSING) {
+                store.uiStore.setLoading(false);
+                clearInterval(intervalId);
+              }
+            }, 3000);
+            setIntervalId(loadInterval);
+          } else {
+            store.uiStore.setLoading(false);
+          }
+          return draft;
+        })
         .then(setDraft);
-    }
-    store.requestStore.checkProcessing().then((isProcessing) => {
-      store.uiStore.setLoading(isProcessing);
-      const loadInterval = setTimeout(() => {
-        store.requestStore.checkProcessing().then(() => {
-          store.uiStore.setLoading(false);
-        });
-      }, 3000);
 
       return () => {
-        clearTimeout(loadInterval);
+        clearInterval(intervalId);
       };
-    });
-  }, []);
+    }
+  }, [
+    draftId,
+    intervalId,
+    store.draftStore,
+    store.requestStore,
+    store.uiStore,
+  ]);
 
   return (
     <div className='form__container'>
@@ -128,7 +146,6 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         <Button
           onClick={() => {
             store.draftStore.save(draft?.id).then(() => {
-              store.draftStore.clear();
               navigate('/');
             });
           }}
@@ -138,7 +155,6 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         <Button
           onClick={() => {
             store.draftStore.register(draft?.id).then(() => {
-              store.draftStore.clear();
               navigate('/');
             });
           }}
@@ -146,6 +162,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           Отправить на регистрацию
         </Button>
       </div>
+      <LoaderOverlay show={store.uiStore.isLoading} />
     </div>
   );
 });

@@ -128,14 +128,15 @@ class draftStore {
     this.city = value;
   }
 
-  @action save(id?: number) {
+  @action async save(id?: number) {
     const request: IRequestBody = this.getNewRequest();
     if (id) return requestStore.updateRequest(id, request);
 
     return requestStore.createRequest(request);
   }
 
-  @action register(id?: number) {
+  @action async register(id?: number) {
+    if (await requestStore.checkProcessing()) return;
     const request: IRequestBody = this.getNewRequest();
     const fullRequest: IRequestBody & Partial<IRequestFull> = {
       ...request,

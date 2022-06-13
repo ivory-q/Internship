@@ -1,7 +1,6 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { Requests } from '../services/http.service';
-import EStatuses from '../types/enums/EStatuses';
-import { IRequestBody, IRequestFull } from '../types/IRequest';
+import { IRequestBody } from '../types/IRequest';
 
 class requestStore {
   @observable isLoading = false;
@@ -87,11 +86,6 @@ class requestStore {
   @action getStatus(id: number) {
     const request = this.requestsRegistry.get(id);
     return request.status.code;
-  }
-
-  @action resolve(request: IRequestFull) {
-    request.status.code = EStatuses.SUCCESS;
-    return this.updateRequest(request.id, request);
   }
 }
 

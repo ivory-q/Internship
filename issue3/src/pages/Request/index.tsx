@@ -21,14 +21,16 @@ export const Request = observer(({ store }: { store: typeof rootStore }) => {
       store.requestStore
         .loadRequest(parseInt(reqId), { acceptCached: true })
         .then((req) => {
-          req.status.code == EStatuses.DRAFT && navigate(`/draft/${req.id}`);
+          (req.status.code == EStatuses.DRAFT ||
+            req.status.code == EStatuses.PROCESSING) &&
+            navigate(`/draft/${req.id}`);
           return req;
         })
         .then((req) => {
           setRequest(req);
         });
     }
-  }, []);
+  }, [navigate, reqId, store.requestStore]);
 
   return (
     <>
@@ -50,18 +52,6 @@ export const Request = observer(({ store }: { store: typeof rootStore }) => {
           </div>
           <div className='request__actions'>
             <Button onClick={() => navigate('/')}>К списку заявок</Button>
-
-            {request.status.code != EStatuses.SUCCESS && (
-              <Button
-                onClick={() => {
-                  store.requestStore.resolve(request).then(() => {
-                    navigate('/');
-                  });
-                }}
-              >
-                Разрешить
-              </Button>
-            )}
           </div>
         </div>
       )}

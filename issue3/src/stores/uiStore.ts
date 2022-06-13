@@ -1,7 +1,7 @@
 import { action, makeObservable, observable } from 'mobx';
 
 class uiStore {
-  @observable isLoading = false;
+  @observable isLoading = true;
 
   constructor() {
     makeObservable(this);

@@ -103,7 +103,7 @@ export default function initMockServer() {
         return schema.create('request', attrs)?.attrs;
       });
 
-      this.put('/request', (schema: AppSchema, req) => {
+      this.put('/request/:id', (schema: AppSchema, req) => {
         const newAttrs = JSON.parse(req.requestBody);
         const id = req.params.id;
         const request = schema.find('request', id);
@@ -111,8 +111,7 @@ export default function initMockServer() {
         if (!request) return new Response(400, { errors: 'No such request' });
 
         request.update(newAttrs);
-
-        return request;
+        return request.attrs;
       });
 
       this.get('/dictionary/:key', (schema: AppSchema, req) => {

@@ -26,8 +26,8 @@ const Requests = {
     requests.post('/request', body),
   register: (body: IRequestBody): Promise<IRequestFull> =>
     requests.post('/request/registration', body),
-  update: (body: IRequestBody): Promise<IRequestFull> =>
-    requests.put('/request', body),
+  update: (id: number, body: IRequestBody): Promise<IRequestFull> =>
+    requests.put(`/request/${id}`, body),
 };
 
 const Dictionaries = {

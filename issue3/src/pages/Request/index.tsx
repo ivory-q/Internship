@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../../components/Button';
 import rootStore from '../../stores/rootStore';
+import EStatuses from '../../types/enums/EStatuses';
 import { IRequestFull } from '../../types/IRequest';
 import getIcon from '../../utils/getIcon';
 import ISOtoDateString from '../../utils/ISOtoDateString';
@@ -18,8 +19,14 @@ export const Request = observer(({ store }: { store: typeof rootStore }) => {
   useEffect(() => {
     if (reqId) {
       store.requestStore
-        .loadRequest(2, { acceptCached: true })
-        .then(setRequest);
+        .loadRequest(parseInt(reqId), { acceptCached: true })
+        .then((req) => {
+          req.status.code == EStatuses.DRAFT && navigate(`/draft/${req.id}`);
+          return req;
+        })
+        .then((req) => {
+          setRequest(req);
+        });
     }
   }, []);
 
@@ -41,8 +48,20 @@ export const Request = observer(({ store }: { store: typeof rootStore }) => {
               Дата заявки: {ISOtoDateString(request.createDate)}
             </p>
           </div>
-          <div className='requset__actions'>
+          <div className='request__actions'>
             <Button onClick={() => navigate('/')}>К списку заявок</Button>
+
+            {request.status.code != EStatuses.SUCCESS && (
+              <Button
+                onClick={() => {
+                  store.requestStore.resolve(request).then(() => {
+                    navigate('/');
+                  });
+                }}
+              >
+                Разрешить
+              </Button>
+            )}
           </div>
         </div>
       )}

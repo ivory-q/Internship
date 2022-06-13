@@ -1,6 +1,7 @@
 import { action } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../../components/Button';
 import { Checkbox } from '../../components/Checkbox';
 import { Dropdown } from '../../components/Dropdown';
@@ -8,10 +9,39 @@ import { Input } from '../../components/Input';
 import rootStore from '../../stores/rootStore';
 import ICar from '../../types/ICar';
 import ICity from '../../types/ICity';
+import { IRequestFull } from '../../types/IRequest';
 import './index.scss';
 
 export const Draft = observer(({ store }: { store: typeof rootStore }) => {
+  const { draftId } = useParams();
   const navigate = useNavigate();
+
+  const [draft, setDraft] = useState<IRequestFull | null>(null);
+
+  useEffect(() => {
+    if (draftId) {
+      store.requestStore
+        .loadRequest(parseInt(draftId), { acceptCached: true })
+        .then((draft) => {
+          store.draftStore.setDraft(draft);
+          return draft;
+        })
+        .then(setDraft);
+    }
+    store.requestStore.checkProcessing().then((isProcessing) => {
+      store.uiStore.setLoading(isProcessing);
+      const loadInterval = setTimeout(() => {
+        store.requestStore.checkProcessing().then(() => {
+          store.uiStore.setLoading(false);
+        });
+      }, 3000);
+
+      return () => {
+        clearTimeout(loadInterval);
+      };
+    });
+  }, []);
+
   return (
     <div className='form__container'>
       <div className='form__header'>
@@ -22,67 +52,71 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         <Input
           type='text'
           placeholder='Фамилия'
-          value={store.formStore.lastName}
+          value={store.draftStore.lastName}
           onInput={action((e) => {
-            store.formStore.setLastName((e.target as HTMLInputElement).value);
+            store.draftStore.setLastName((e.target as HTMLInputElement).value);
           })}
         />
         <Input
           placeholder='Имя'
-          value={store.formStore.firstName}
+          value={store.draftStore.firstName}
           onInput={action((e) => {
-            store.formStore.setFirstName((e.target as HTMLInputElement).value);
+            store.draftStore.setFirstName((e.target as HTMLInputElement).value);
           })}
         />
         <Input
           placeholder='Отчество'
-          value={store.formStore.secondName}
+          value={store.draftStore.secondName}
           onInput={action((e) => {
-            store.formStore.setSecondName((e.target as HTMLInputElement).value);
+            store.draftStore.setSecondName(
+              (e.target as HTMLInputElement).value
+            );
           })}
         />
         <Input
           placeholder='Email'
           type='email'
-          value={store.formStore.email}
+          value={store.draftStore.email}
           onInput={action((e) => {
-            store.formStore.setEmail((e.target as HTMLInputElement).value);
+            store.draftStore.setEmail((e.target as HTMLInputElement).value);
           })}
         />
         <div className='form__group'>
           <Input
             placeholder='Водительское удостоверение'
-            value={store.formStore.driverLicense}
+            value={store.draftStore.driverLicense}
             onInput={action((e) => {
-              store.formStore.setDriverLicense(
+              store.draftStore.setDriverLicense(
                 (e.target as HTMLInputElement).value
               );
             })}
           />
           <Dropdown
             title='Город'
+            value={store.draftStore.city}
             list={store.dictionaryStore.cities}
             onChange={action((item) => {
-              store.formStore.setCity(item as ICity);
+              store.draftStore.setCity(item as ICity);
             })}
           />
         </div>
         <div className='form__group'>
           <Dropdown
             title='Марка автомобиля'
+            value={store.draftStore.brandObj}
             list={store.dictionaryStore.brands}
             onChange={action((item) => {
               store.dictionaryStore.updateModels(item.name);
-              store.formStore.clearCar();
-              store.formStore.setBrand(item.name || '');
+              store.draftStore.clearCar();
+              store.draftStore.setBrand(item.name || '');
             })}
           />
           <Dropdown
             title='Модель'
-            value={store.formStore.car}
+            value={store.draftStore.car}
             list={store.dictionaryStore.models}
             onChange={action((item) => {
-              store.formStore.setCar(item as ICar);
+              store.draftStore.setCar(item as ICar);
             })}
           />
         </div>
@@ -93,8 +127,8 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
       <div className='form__actions'>
         <Button
           onClick={() => {
-            store.formStore.save().then(() => {
-              store.formStore.clear();
+            store.draftStore.save(draft?.id).then(() => {
+              store.draftStore.clear();
               navigate('/');
             });
           }}
@@ -103,8 +137,8 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         </Button>
         <Button
           onClick={() => {
-            store.formStore.register().then(() => {
-              store.formStore.clear();
+            store.draftStore.register(draft?.id).then(() => {
+              store.draftStore.clear();
               navigate('/');
             });
           }}

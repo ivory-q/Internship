@@ -1,6 +1,7 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { Requests } from '../services/http.service';
-import { IRequestBody } from '../types/IRequest';
+import EStatuses from '../types/enums/EStatuses';
+import { IRequestBody, IRequestFull } from '../types/IRequest';
 
 class requestStore {
   @observable isLoading = false;
@@ -72,8 +73,8 @@ class requestStore {
     return newRequest;
   }
 
-  @action async updateRequest(request: IRequestBody) {
-    const newRequest = await Requests.update(request);
+  @action async updateRequest(id: number, request: IRequestBody) {
+    const newRequest = await Requests.update(id, request);
     this.requestsRegistry.set(newRequest.id, newRequest);
     return newRequest;
   }
@@ -86,6 +87,11 @@ class requestStore {
   @action getStatus(id: number) {
     const request = this.requestsRegistry.get(id);
     return request.status.code;
+  }
+
+  @action resolve(request: IRequestFull) {
+    request.status.code = EStatuses.SUCCESS;
+    return this.updateRequest(request.id, request);
   }
 }
 

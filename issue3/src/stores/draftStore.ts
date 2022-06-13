@@ -1,7 +1,8 @@
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
+import EStatuses from '../types/enums/EStatuses';
 import ICar from '../types/ICar';
 import ICity from '../types/ICity';
-import { IRequestBody } from '../types/IRequest';
+import { IRequestBody, IRequestFull } from '../types/IRequest';
 import Nullable from '../types/Nullable';
 import requestStore from './requestStore';
 
@@ -23,6 +24,10 @@ class draftStore {
     code: null,
     name: null,
   };
+
+  @computed get brandObj() {
+    return { name: this.brand };
+  }
 
   constructor() {
     makeObservable(this);
@@ -77,6 +82,19 @@ class draftStore {
     };
   }
 
+  @action.bound setDraft(request: IRequestBody) {
+    this.lastName = request.person.lastName;
+    this.firstName = request.person.firstName;
+    this.secondName = request.person.secondName;
+
+    this.driverLicense = request.person.driverLicense;
+    this.email = request.person.email;
+
+    this.brand = request.auto.brand;
+    this.car = request.auto.model;
+    this.city = request.city;
+  }
+
   @action setLastName(value: string) {
     this.lastName = value;
   }
@@ -110,14 +128,22 @@ class draftStore {
     this.city = value;
   }
 
-  @action save() {
+  @action save(id?: number) {
     const request: IRequestBody = this.getNewRequest();
+    if (id) return requestStore.updateRequest(id, request);
 
     return requestStore.createRequest(request);
   }
 
-  @action register() {
+  @action register(id?: number) {
     const request: IRequestBody = this.getNewRequest();
+    const fullRequest: IRequestBody & Partial<IRequestFull> = {
+      ...request,
+      status: {
+        code: EStatuses.PROCESSING,
+      },
+    };
+    if (id) return requestStore.updateRequest(id, fullRequest);
 
     return requestStore.registerRequest(request);
   }

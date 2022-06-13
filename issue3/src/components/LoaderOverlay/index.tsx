@@ -6,13 +6,15 @@ interface ILoaderOverlayProps {
 }
 
 export const LoaderOverlay = ({ show }: ILoaderOverlayProps) => {
-  if (show)
-    return (
-      <div className='loader__overlay'>
-        <div className='loader__icon'>
-          <img src={Loader} alt='Loading' />
+  return (
+    <>
+      {show && (
+        <div className='loader__overlay'>
+          <div className='loader__icon'>
+            <img src={Loader} alt='Loading' />
+          </div>
         </div>
-      </div>
-    );
-  return <></>;
+      )}
+    </>
+  );
 };

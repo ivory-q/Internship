@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
@@ -9,7 +10,7 @@ import { List } from './pages/List';
 import { Request } from './pages/Request';
 import rootStore from './stores/rootStore';
 
-export const App = () => {
+export const App = observer(() => {
   useEffect(() => {
     rootStore.dictionaryStore.loadDictionaries().then(() => {
       rootStore.dictionaryStore.loadBrands();
@@ -29,10 +30,11 @@ export const App = () => {
             element={<Request store={rootStore} />}
           />
           <Route path='/draft' element={<Draft store={rootStore} />} />
+          <Route path='/draft/:draftId' element={<Draft store={rootStore} />} />
         </Routes>
       </div>
       <Footer />
-      <LoaderOverlay show={false} />
+      <LoaderOverlay show={rootStore.uiStore.isLoading} />
     </>
   );
-};
+});

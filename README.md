@@ -7,6 +7,18 @@
 Взаимодействие с API в services/http.service.ts
 Mock API в modules/mock.module.ts
 
+## ENV
+
+```
+APP_TITLE - Название приложения
+
+API_MOCK - Переключатель mock сервера
+
+API_SIMULATE_ERRORS - Ошибки для теста уведомлений
+
+API_ROOT - Путь API запросов
+```
+
 ## Запуск
 
 ### - Yarn

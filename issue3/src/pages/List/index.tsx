@@ -40,6 +40,13 @@ export const List = observer(({ store }: { store: typeof rootStore }) => {
         >
           Создать заявку
         </Button>
+        <Button
+          onClick={() => {
+            store.uiStore.success('Тестовое уведомление');
+          }}
+        >
+          Уведомление
+        </Button>
       </div>
     </div>
   );

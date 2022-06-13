@@ -23,4 +23,11 @@
   &__requests {
     margin: 20px 0;
   }
+
+  &__actions {
+    display: flex;
+    & > * + * {
+      margin-left: 30px;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { Requests } from '../services/http.service';
 import { IRequestBody } from '../types/IRequest';
+import uiStore from './uiStore';
 
 class requestStore {
   @observable isLoading = false;
@@ -33,6 +34,9 @@ class requestStore {
           );
         })
       )
+      .catch((error) => {
+        uiStore.alert(`${error.response.status} ${error.response.data.errors}`);
+      })
       .finally(
         action(() => {
           this.isLoading = false;
@@ -53,6 +57,9 @@ class requestStore {
           return request;
         })
       )
+      .catch((error) => {
+        uiStore.alert(`${error.response.status} Ошибка получения заявки`);
+      })
       .finally(
         action(() => {
           this.isLoading = false;

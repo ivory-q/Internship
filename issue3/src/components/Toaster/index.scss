@@ -1,0 +1,50 @@
+.toaster {
+  &__container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 300px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 8;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background-color: var(--clr-primary-300);
+    }
+  }
+
+  &__body {
+    padding: 20px 30px;
+    border-radius: 4px;
+    margin: 5px;
+    font-weight: 500;
+    animation: slide 300ms ease-out forwards;
+
+    @keyframes slide {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    &--alert {
+      background-color: lightcoral;
+    }
+    &--warning {
+      background-color: rgb(255, 255, 160);
+    }
+    &--success {
+      background-color: lightgreen;
+    }
+  }
+}

@@ -52,6 +52,9 @@ export default function initMockServer() {
       this.get('/requests', (schema: AppSchema) => {
         const request = schema.all('request').models;
 
+        if (process.env.API_SIMULATE_ERRORS == 'true')
+          return new Response(500, {}, { errors: ['Ошибка сервера'] });
+
         return request;
       });
 
@@ -59,7 +62,10 @@ export default function initMockServer() {
         const id = req.params.id;
         const request = schema.find('request', id)?.attrs;
 
-        if (!request) return new Response(400, { errors: 'No such request' });
+        if (!request) return new Response(404, { errors: 'Заявка не найдена' });
+
+        if (process.env.API_SIMULATE_ERRORS == 'true')
+          return new Response(404, { errors: 'Заявка не найдена' });
 
         return request;
       });
@@ -69,7 +75,10 @@ export default function initMockServer() {
         const request = schema.find('request', id);
         const status = request?.status?.code;
 
-        if (!status) return new Response(400, { errors: 'No such request' });
+        if (!status) return new Response(404, { errors: 'Заявка не найдена' });
+
+        if (process.env.API_SIMULATE_ERRORS == 'true')
+          return new Response(404, { errors: 'Заявка не найдена' });
 
         return status;
       });

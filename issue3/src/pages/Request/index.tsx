@@ -21,6 +21,10 @@ export const Request = observer(({ store }: { store: typeof rootStore }) => {
       store.requestStore
         .loadRequest(parseInt(reqId), { acceptCached: true })
         .then((req) => {
+          if (!req) throw 'Ошибка получения заявки';
+          return req;
+        })
+        .then((req) => {
           (req.status.code == EStatuses.DRAFT ||
             req.status.code == EStatuses.PROCESSING) &&
             navigate(`/draft/${req.id}`);
@@ -28,6 +32,9 @@ export const Request = observer(({ store }: { store: typeof rootStore }) => {
         })
         .then((req) => {
           setRequest(req);
+        })
+        .catch((error) => {
+          store.uiStore.alert(`${error}`);
         });
     }
   }, [navigate, reqId, store.requestStore]);

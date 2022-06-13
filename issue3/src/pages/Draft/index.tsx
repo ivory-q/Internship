@@ -36,6 +36,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         })
         .then((draft) => {
           if (draft.status.code == EStatuses.PROCESSING) {
+            store.uiStore.warning('Заявка обрабатывается');
             intervalId = setInterval(() => {
               console.log('tick');
               const status = store.requestStore.getStatus(draft.id);
@@ -49,7 +50,12 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           }
           return draft;
         })
-        .then(setDraft);
+        .then(setDraft)
+        .catch((error) => {
+          store.uiStore.alert(
+            `${error.response.status} ${error.response.data.errors}`
+          );
+        });
     }
     return () => {
       clearInterval(intervalId);
@@ -156,6 +162,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
             store.draftStore.validate &&
               store.draftStore.save(draft?.id).then(() => {
                 navigate('/');
+                store.uiStore.success('Успешно сохранено');
               });
           }}
         >
@@ -167,6 +174,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
             store.draftStore.validate &&
               store.draftStore.register(draft?.id).then(() => {
                 navigate('/');
+                store.uiStore.success('Успешно зарегистрировано');
               });
           }}
         >

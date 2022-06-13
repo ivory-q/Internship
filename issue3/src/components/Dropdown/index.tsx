@@ -25,14 +25,6 @@ export const Dropdown = ({
   const dropdownMenu = useRef(null);
   useOnClickOutside(dropdownMenu, () => setIsOpen(false));
 
-  useEffect(() => {
-    if (value?.name) {
-      selectItem(value);
-    } else {
-      clearSelection();
-    }
-  }, [value]);
-
   const clearSelection = () => {
     setHeaderTitle(title);
     setIsSelected(false);
@@ -46,6 +38,15 @@ export const Dropdown = ({
     setIsSelected(true);
     onChange(item);
   };
+
+  useEffect(() => {
+    if (value?.name) {
+      selectItem(value);
+    } else {
+      clearSelection();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <div

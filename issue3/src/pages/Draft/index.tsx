@@ -19,10 +19,11 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
   const navigate = useNavigate();
 
   const [draft, setDraft] = useState<IRequestFull | null>(null);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
   const [regDisabled, setRegDisabled] = useState<boolean>(true);
 
   useEffect(() => {
+    let intervalId: NodeJS.Timer;
+
     store.draftStore.clear();
     store.requestStore.checkProcessing().then(setRegDisabled);
     if (draftId) {
@@ -35,14 +36,14 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         })
         .then((draft) => {
           if (draft.status.code == EStatuses.PROCESSING) {
-            const loadInterval = setInterval(() => {
+            intervalId = setInterval(() => {
+              console.log('tick');
               const status = store.requestStore.getStatus(draft.id);
               if (status != EStatuses.PROCESSING) {
                 store.uiStore.setLoading(false);
                 clearInterval(intervalId);
               }
             }, 3000);
-            setIntervalId(loadInterval);
           } else {
             store.uiStore.setLoading(false);
           }
@@ -53,13 +54,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [
-    draftId,
-    intervalId,
-    store.draftStore,
-    store.requestStore,
-    store.uiStore,
-  ]);
+  }, []);
 
   return (
     <div className='form__container'>
@@ -72,6 +67,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           type='text'
           placeholder='Фамилия'
           value={store.draftStore.lastName}
+          error={store.draftStore.validation_errors.lastName}
           onInput={action((e) => {
             store.draftStore.setLastName((e.target as HTMLInputElement).value);
           })}
@@ -79,6 +75,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         <Input
           placeholder='Имя'
           value={store.draftStore.firstName}
+          error={store.draftStore.validation_errors.firstName}
           onInput={action((e) => {
             store.draftStore.setFirstName((e.target as HTMLInputElement).value);
           })}
@@ -86,6 +83,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         <Input
           placeholder='Отчество'
           value={store.draftStore.secondName}
+          error={store.draftStore.validation_errors.secondName}
           onInput={action((e) => {
             store.draftStore.setSecondName(
               (e.target as HTMLInputElement).value
@@ -96,6 +94,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           placeholder='Email'
           type='email'
           value={store.draftStore.email}
+          error={store.draftStore.validation_errors.email}
           onInput={action((e) => {
             store.draftStore.setEmail((e.target as HTMLInputElement).value);
           })}
@@ -104,6 +103,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           <Input
             placeholder='Водительское удостоверение'
             value={store.draftStore.driverLicense}
+            error={store.draftStore.validation_errors.driverLicense}
             onInput={action((e) => {
               store.draftStore.setDriverLicense(
                 (e.target as HTMLInputElement).value
@@ -114,6 +114,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
             title='Город'
             value={store.draftStore.city}
             list={store.dictionaryStore.cities}
+            error={store.draftStore.validation_errors.city}
             onChange={action((item) => {
               store.draftStore.setCity(item as ICity);
             })}
@@ -124,6 +125,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
             title='Марка автомобиля'
             value={store.draftStore.brandObj}
             list={store.dictionaryStore.brands}
+            error={store.draftStore.validation_errors.brand}
             onChange={action((item) => {
               store.dictionaryStore.updateModels(item.name);
               store.draftStore.clearCar();
@@ -134,6 +136,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
             title='Модель'
             value={store.draftStore.car}
             list={store.dictionaryStore.models}
+            error={store.draftStore.validation_errors.car}
             onChange={action((item) => {
               store.draftStore.setCar(item as ICar);
             })}
@@ -141,6 +144,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         </div>
         <Checkbox
           checked={store.draftStore.checkbox}
+          error={store.draftStore.validation_errors.checkbox}
           onChange={(checked) => store.draftStore.setCheckbox(checked)}
         >
           Согласен на обработку персональных данных
@@ -149,9 +153,10 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
       <div className='form__actions'>
         <Button
           onClick={() => {
-            store.draftStore.save(draft?.id).then(() => {
-              navigate('/');
-            });
+            store.draftStore.validate &&
+              store.draftStore.save(draft?.id).then(() => {
+                navigate('/');
+              });
           }}
         >
           Сохранить
@@ -159,9 +164,10 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
         <Button
           disabled={regDisabled}
           onClick={() => {
-            store.draftStore.register(draft?.id).then(() => {
-              navigate('/');
-            });
+            store.draftStore.validate &&
+              store.draftStore.register(draft?.id).then(() => {
+                navigate('/');
+              });
           }}
         >
           Отправить на регистрацию

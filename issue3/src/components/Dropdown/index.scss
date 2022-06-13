@@ -2,7 +2,9 @@
 
 .dropdown {
   &--error {
-    border: 2px red solid;
+    outline: 2px solid red;
+    outline-offset: -2px;
+    // border: 2px red solid;
   }
 
   &__header {

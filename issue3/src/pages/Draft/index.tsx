@@ -22,8 +22,8 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
 
   useEffect(() => {
+    store.draftStore.clear();
     if (draftId) {
-      store.draftStore.clear();
       store.uiStore.setLoading(true);
       store.requestStore
         .loadRequest(parseInt(draftId), { acceptCached: true })
@@ -47,11 +47,10 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           return draft;
         })
         .then(setDraft);
-
-      return () => {
-        clearInterval(intervalId);
-      };
     }
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [
     draftId,
     intervalId,
@@ -138,7 +137,10 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
             })}
           />
         </div>
-        <Checkbox onChange={(checked) => console.log(checked)}>
+        <Checkbox
+          checked={store.draftStore.checkbox}
+          onChange={(checked) => store.draftStore.setCheckbox(checked)}
+        >
           Согласен на обработку персональных данных
         </Checkbox>
       </div>

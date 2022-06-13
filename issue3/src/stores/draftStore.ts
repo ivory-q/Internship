@@ -25,6 +25,9 @@ class draftStore {
     name: null,
   };
 
+  @observable checkbox = false;
+  @observable validation_errors = [];
+
   @computed get brandObj() {
     return { name: this.brand };
   }
@@ -73,6 +76,8 @@ class draftStore {
       code: null,
       name: null,
     };
+    this.checkbox = false;
+    this.validation_errors = [];
   }
 
   @action clearCar() {
@@ -126,6 +131,10 @@ class draftStore {
 
   @action setCity(value: ICity) {
     this.city = value;
+  }
+
+  @action setCheckbox(value: boolean) {
+    this.checkbox = value;
   }
 
   @action async save(id?: number) {

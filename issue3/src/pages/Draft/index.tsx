@@ -20,9 +20,11 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
 
   const [draft, setDraft] = useState<IRequestFull | null>(null);
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
+  const [regDisabled, setRegDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     store.draftStore.clear();
+    store.requestStore.checkProcessing().then(setRegDisabled);
     if (draftId) {
       store.uiStore.setLoading(true);
       store.requestStore
@@ -155,6 +157,7 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           Сохранить
         </Button>
         <Button
+          disabled={regDisabled}
           onClick={() => {
             store.draftStore.register(draft?.id).then(() => {
               navigate('/');

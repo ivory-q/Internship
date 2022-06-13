@@ -5,9 +5,9 @@ interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   children?: ReactNode;
 }
 
-export const Button = ({ children, className, ...props }: IButtonProps) => {
+export const Button = ({ children, ...props }: IButtonProps) => {
   return (
-    <button {...props} className={`btn ${className}`} type='button'>
+    <button {...props} className={`btn`} type='button'>
       {children}
     </button>
   );

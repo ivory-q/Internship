@@ -26,7 +26,7 @@ export const Request = ({ id, status, createDate, auto }: IRequestProps) => {
       <div className='requests__content'>
         <p className='requests__title'>
           <>
-            Заявка №1 на автомобиль {auto.brand} {auto.model.name}
+            Заявка №{id} на автомобиль {auto.brand} {auto.model.name}
           </>
         </p>
         <span className='requests__status'>Статус: {status}</span>

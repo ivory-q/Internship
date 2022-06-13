@@ -12,7 +12,6 @@ export const Toaster = ({ toasts, onClick }: IToasterProps) => {
     <>
       <div className='toaster__container'>
         {toasts.map((toast) => {
-          console.log(toast);
           return (
             <div
               onClick={() => {

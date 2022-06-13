@@ -38,7 +38,6 @@ export const Draft = observer(({ store }: { store: typeof rootStore }) => {
           if (draft.status.code == EStatuses.PROCESSING) {
             store.uiStore.warning('Заявка обрабатывается');
             intervalId = setInterval(() => {
-              console.log('tick');
               const status = store.requestStore.getStatus(draft.id);
               if (status != EStatuses.PROCESSING) {
                 store.uiStore.setLoading(false);
